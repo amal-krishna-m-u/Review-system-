@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'loginpage.html' %}
+    {% include 'regpage.html' %}
+
+    {% if status_interest %}
+        {% if status_interest == 'Inserted succesfully' %}
+            <script>alert("Registration successful Please Login")</script>
+        {% else %}
+            <script>alert("Registration Failed")</script>
+        {% endif %}
+    {% endif %}
+
+    {% if status_paswd %}
+        {% if status_paswd == 'password reset successfully' %}
+            <script>alert("Password Updated")</script>
+        {% endif %}
+    {% endif %}
+
+    {% with status_interest=None status_paswd=None %}
+        {% sesssion.destroy %}
+    {% endwith %}
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static 'js/reg-animation.js' %}"></script>
+{% endblock %}
